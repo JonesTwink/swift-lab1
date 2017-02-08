@@ -36,15 +36,33 @@ class ViewController: UIViewController {
     }
     
     func validateInput()->Bool{
+        if (inputMain.text! == ""){
+            inputMain.text = "1"
+        }
+        if (inputVoltage.text == ""){
+            inputVoltage.text = "1";
+        }
         if let capacity = Double (inputMain.text!){
-            converter.capacity = capacity
+            if (capacity == 0){
+                converter.capacity = 1
+                inputMain.text = "1"
+            }
+            else{
+                converter.capacity = capacity
+            }
         }
         else{
             showErrorPopup(msg: "Введите корректное значение емкости!")
             return false
         }
         if let voltage = Double(inputVoltage.text!){
-            converter.voltage = voltage
+            if (voltage == 0){
+                converter.voltage = 1
+                inputVoltage.text = "1"
+            }
+            else{
+                converter.voltage = voltage
+            }
             return true
         }
         else{
